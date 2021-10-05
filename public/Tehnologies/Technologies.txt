@@ -1,0 +1,6 @@
+Materials UI
+TypeScript 
+Scss 
+FireBase
+npm install --save @types/react-router-dom
+npx create-react-app my-app --template typescript
