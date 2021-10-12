@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import SinglePage from "../SinglePage/SinglePage";
 import "./Trending.scss";
 import InfiniteScroll from "react-infinite-scroll-component";
-import AddToFavorites from "../AddToFavorites/AddToFavorites"
+
 
 interface Props {
     title: string;
@@ -56,6 +56,7 @@ const Trending: React.FC = () => {
        } */
 
     return (
+
         <InfiniteScroll
             dataLength={movies.length}
             next={fetchTrending}

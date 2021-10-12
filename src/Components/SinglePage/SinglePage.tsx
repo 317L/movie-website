@@ -4,7 +4,6 @@ import { img_300, unavailable } from "../Config/Config";
 import ContentModal from "../Modal/Modal";
 import "./SinglePage.scss";
 import { Button } from "@material-ui/core";
-import AddToFavorites from "../AddToFavorites/AddToFavorites"
 
 interface Props {
     title: string;
@@ -36,9 +35,7 @@ function SinglePage({ id, poster, title, date, media_type, vote_average, }: Prop
 
                 </span>
 
-                <span>
-                    <Button onClick={AddToFavorites}>Add Favorites</Button>
-                </span>
+
 
             </ContentModal>
         </div>

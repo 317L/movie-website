@@ -10,16 +10,14 @@ import { useHistory } from "react-router-dom";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 
+
+
 const useStyles = makeStyles({
   root: {
     width: "100%",
     backgroundColor: "black",
     position: "fixed",
     bottom: 0,
-
-
-
-
   },
 });
 
@@ -28,12 +26,13 @@ export default function SimpleBottomNavigation() {
   const [value, setValue] = React.useState(0);
   const history = useHistory();
 
+
   useEffect(() => {
     if (value === 0) history.push("/");
-    else if (value === 1) history.push("/Movies");
-    else if (value === 2) history.push("/TvSeries");
+    else if (value === 1) history.push(`/Movies/`);
+    else if (value === 2) history.push(`/TvSeries`);
     else if (value === 3) history.push("/Search");
-    else if (value === 4) history.push("/Favorites");
+    else if (value === 4) history.push(`/FavoritesMain/Add/`);
   }, [value, history]);
 
   return (
