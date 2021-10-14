@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as React from "react";
 import { useState, useEffect } from "react";
-import SinglePage from "../SinglePage/SinglePage";
+import SinglePage from "../../SinglePage/SinglePage";
 import "./Trending.scss";
 import InfiniteScroll from "react-infinite-scroll-component";
 

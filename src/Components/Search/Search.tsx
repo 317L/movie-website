@@ -1,9 +1,9 @@
 import { Button, createTheme, Tab, Tabs, TextField, ThemeProvider } from "@material-ui/core";
 import "./Search.scss";
 import SearchIcon from "@material-ui/icons/Search";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import SingleContent from "../SinglePage/SinglePage";
+import SinglePage from "../../SinglePage/SinglePage"
 import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {
@@ -109,7 +109,7 @@ const Search: React.FC = () => {
                 <div className="Trending">
                     {content &&
                         content.map((c: Props) => (
-                            <SingleContent
+                            <SinglePage
                                 key={c.id}
                                 id={c.id}
                                 poster={c.poster_path}

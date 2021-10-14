@@ -1,10 +1,10 @@
 import axios from "axios";
 import * as React from "react";
 import { useState, useEffect } from "react";
-import SinglePage from "../SinglePage/SinglePage";
+import SinglePage from "../../SinglePage/SinglePage";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Genres from "../Genres/Genres";
-import useGenres from "../Hooks/useGenre";
+import Genres from "../../Genres/Genres";
+import useGenres from "../../Hooks/useGenre";
 
 interface Mov {
     title: string;
