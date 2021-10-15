@@ -2,6 +2,7 @@ import { Chip } from "@material-ui/core";
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 interface Movies {
     selectedGenres: any;
@@ -12,18 +13,26 @@ interface Movies {
     setPage: any;
     name: any;
     id: any;
+
+
+
 }
 
-const Genres = ({ selectedGenres, setSelectedGenres, genres, setGenres, type, setPage }: Movies) => {
 
-    const handleAdd = (genre: { id: object }) => {
-        setGenres(genres.filter((g: { id: object }) => g.id !== genre.id));
+
+const Genres = ({ selectedGenres, setSelectedGenres, genres, setGenres, type, setPage, }: Movies) => {
+
+
+
+
+    const handleAdd = (genre: { id: any }) => {
+        setGenres(genres.filter((g: { id: any }) => g.id !== genre.id));
         setSelectedGenres([...selectedGenres, genre]);
         setPage(1);
     };
 
-    function handleRemove(genre: { id: object }) {
-        setSelectedGenres(selectedGenres.filter((selected: { id: object }) => selected.id !== genre.id));
+    function handleRemove(genre: { id: any }) {
+        setSelectedGenres(selectedGenres.filter((selected: { id: any }) => selected.id !== genre.id));
         setGenres([...genres, genre]);
         setPage(1);
     }
@@ -49,10 +58,14 @@ const Genres = ({ selectedGenres, setSelectedGenres, genres, setGenres, type, se
         // eslint-disable-next-line
     }, []);
 
+
+
     return (
+
         <div style={{ padding: "6px 0" }}>
             {selectedGenres &&
                 selectedGenres.map((genre: Movies) => (
+
                     <Chip
                         style={{ margin: 2 }}
                         label={genre.name}
@@ -62,7 +75,9 @@ const Genres = ({ selectedGenres, setSelectedGenres, genres, setGenres, type, se
                         size="small"
                         onDelete={() => handleRemove(genre)}
                     />
+
                 ))}
+
             {genres.map((genre: Movies) => (
                 <Chip
                     style={{ margin: 2 }}
@@ -73,7 +88,10 @@ const Genres = ({ selectedGenres, setSelectedGenres, genres, setGenres, type, se
                     onClick={() => handleAdd(genre)}
                 />
             ))}
+
         </div>
+
+
     );
 };
 

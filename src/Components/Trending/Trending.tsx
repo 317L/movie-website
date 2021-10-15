@@ -19,6 +19,7 @@ interface Props {
     name: string;
     release_date: number;
     arr: number | string;
+
 }
 const Trending: React.FC = () => {
     const [movies, setMovies] = useState([]);

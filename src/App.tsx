@@ -18,7 +18,7 @@ const App: React.FC = () => {
       <div className="app">
         <Container>
           <Switch>
-            <Route path="/" component={Trending} exact />
+            <Route path="/Trending" component={Trending} />
             <Route path="/Movies" component={Movies} />
             <Route path="/TVSeries" component={Series} />
             <Route path="/Search" component={Search} />

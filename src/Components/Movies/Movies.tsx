@@ -5,6 +5,7 @@ import SinglePage from "../../SinglePage/SinglePage";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Genres from "../../Genres/Genres";
 import useGenres from "../../Hooks/useGenre";
+import { Link } from "react-router-dom";
 
 interface Mov {
     title: string;
@@ -18,6 +19,9 @@ interface Mov {
     first_air_date: number;
     name: string;
     release_date: number;
+
+
+
 }
 
 const Movies: React.FC = () => {
@@ -53,7 +57,10 @@ const Movies: React.FC = () => {
 
     return (
         <div>
+
+
             <Genres
+
                 id={""}
                 name={""}
                 type="movie"
@@ -62,7 +69,11 @@ const Movies: React.FC = () => {
                 genres={genres}
                 setGenres={setGenres}
                 setPage={setPageNo}
+
             />
+
+
+
 
             <InfiniteScroll
                 dataLength={moviesAll.length}
@@ -87,6 +98,7 @@ const Movies: React.FC = () => {
             </InfiniteScroll>
 
         </div>
+
     );
 };
 
