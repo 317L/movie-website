@@ -71,13 +71,7 @@ const Search: React.FC = () => {
 
   return (
     <div>
-      <InfiniteScroll
-        dataLength={content.length}
-        next={fetchSearch}
-        hasMore={true}
-        loader={<h4></h4>}
-        scrollThreshold="0px"
-      >
+      <InfiniteScroll dataLength={content.length} next={fetchSearch} hasMore={true} loader={""} scrollThreshold="0px">
         <ThemeProvider theme={darkTheme}>
           <div className="search">
             <TextField

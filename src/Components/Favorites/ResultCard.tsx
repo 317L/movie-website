@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import Moment from "react-moment";
 import { GlobalContext } from "./Context/GlobalState";
 
-interface ResultCard {
+interface ResultCards {
   movie?: any;
   addMovieToWatchlist?: any;
   removeMovieFromWatchlist?: any;
 }
 
-export const ResultCard = ({ movie }: ResultCard) => {
+const ResultCard = ({ movie }: ResultCards) => {
   const { addMovieToWatchlist, addMovieToWatched, watchlist, watched } = useContext(GlobalContext) as any;
 
   let storedMovie = watchlist.find((o: { id: any }) => o.id === movie.id);
@@ -49,3 +49,4 @@ export const ResultCard = ({ movie }: ResultCard) => {
     </div>
   );
 };
+export default ResultCard;

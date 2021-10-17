@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "./Context/GlobalState";
 
-interface MovieControls {
+interface MovieControl {
   type?: any;
   movie?: any;
 }
 
-export const MovieControls = ({ type, movie }: MovieControls) => {
+const MovieControls = ({ type, movie }: MovieControl) => {
   const { removeMovieFromWatchlist, addMovieToWatched, moveToWatchlist, removeFromWatched } = useContext<any>(
     GlobalContext
   );
@@ -39,3 +39,4 @@ export const MovieControls = ({ type, movie }: MovieControls) => {
     </div>
   );
 };
+export default MovieControls;

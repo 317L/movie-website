@@ -25,6 +25,7 @@ const Trending: FC<Props> = () => {
   useEffect(() => {
     window.scroll(0, 0);
     fetchTrending();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchTrending = async () => {

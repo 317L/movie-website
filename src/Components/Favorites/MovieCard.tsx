@@ -1,12 +1,12 @@
 import React from "react";
-import { MovieControls } from "./MovieControls";
+import MovieControls from "./MovieControls";
 
-interface MovieCard {
+interface MovieCards {
   movie: any;
   type: any;
 }
 
-export const MovieCard = ({ movie, type }: MovieCard) => {
+const MovieCard = ({ movie, type }: MovieCards) => {
   return (
     <div className="movie-card">
       <div className="overlay"></div>
@@ -17,3 +17,4 @@ export const MovieCard = ({ movie, type }: MovieCard) => {
     </div>
   );
 };
+export default MovieCard;

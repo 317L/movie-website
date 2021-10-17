@@ -29,7 +29,7 @@ export default function SimpleBottomNavigation(name: any) {
     else if (value === 2) history.push({ pathname: `/TvSeries/` });
     else if (value === 3) history.push("/Search");
     else if (value === 4) history.push({ pathname: `/FavoritesMain/Add/` });
-  }, [value, history]);
+  }, [value, history, name]);
 
   return (
     <BottomNavigation

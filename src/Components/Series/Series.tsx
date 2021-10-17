@@ -30,6 +30,7 @@ const Series: React.FC = () => {
   useEffect(() => {
     window.scroll(0, 0);
     fetchSeries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [genreforURL]);
 
   const fetchSeries = async () => {
@@ -59,7 +60,7 @@ const Series: React.FC = () => {
       scrollThreshold="200px"
     >
       <Genres
-        id={""}
+        id={1}
         name={""}
         type="tv"
         selectedGenres={selectedGenres}

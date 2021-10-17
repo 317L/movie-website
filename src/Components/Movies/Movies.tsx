@@ -5,20 +5,19 @@ import SinglePage from "../../SinglePage/SinglePage";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Genres from "../../Genres/Genres";
 import useGenres from "../../Hooks/useGenre";
-import { Link } from "react-router-dom";
 
 interface Mov {
   title: string;
   poster: string | number;
   date: number;
-  id: number;
   media_type: string;
   vote_average: number;
   c: any;
   poster_path: string;
   first_air_date: number;
-  name: string;
   release_date: number;
+  id: number;
+  name: string;
 }
 
 const Movies: React.FC = () => {
@@ -55,7 +54,7 @@ const Movies: React.FC = () => {
   return (
     <div>
       <Genres
-        id={""}
+        id={1}
         name={""}
         type="movie"
         selectedGenres={selectedGenres}

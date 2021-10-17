@@ -2,7 +2,6 @@ import { Chip } from "@material-ui/core";
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
 
 interface Movies {
   selectedGenres: any;
@@ -11,11 +10,11 @@ interface Movies {
   setGenres: any;
   type: string;
   setPage: any;
-  name: any;
-  id: any;
+  name: string;
+  id: number;
 }
 
-const Genres = ({ selectedGenres, setSelectedGenres, genres, setGenres, type, setPage, name }: Movies) => {
+const Genres = ({ selectedGenres, setSelectedGenres, genres, setGenres, type, setPage }: Movies) => {
   const handleAdd = (genre: { id: any }) => {
     setGenres(genres.filter((g: { id: any }) => g.id !== genre.id));
     setSelectedGenres([...selectedGenres, genre]);
