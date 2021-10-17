@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import SearchIcon from '@material-ui/icons/Search';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
-import TheatersIcon from '@material-ui/icons/Theaters';
-import TvIcon from '@material-ui/icons/Tv';
+import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import SearchIcon from "@material-ui/icons/Search";
+import WhatshotIcon from "@material-ui/icons/Whatshot";
+import TheatersIcon from "@material-ui/icons/Theaters";
+import TvIcon from "@material-ui/icons/Tv";
 import { useHistory } from "react-router-dom";
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import Genre from "../Genres/Genres"
-
-
-
-
-
-
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const useStyles = makeStyles({
   root: {
@@ -25,16 +18,14 @@ const useStyles = makeStyles({
   },
 });
 
-
-
-export default function SimpleBottomNavigation(props: any) {
+export default function SimpleBottomNavigation(name: any) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState();
   const history = useHistory();
 
   useEffect(() => {
     if (value === 0) history.push({ pathname: `/Trending/` });
-    else if (value === 1) history.push({ pathname: `/Movies/Genre/`, search: '?query=abc' });
+    else if (value === 1) history.push({ pathname: `/Movies/${name}` });
     else if (value === 2) history.push({ pathname: `/TvSeries/` });
     else if (value === 3) history.push("/Search");
     else if (value === 4) history.push({ pathname: `/FavoritesMain/Add/` });

@@ -19,13 +19,10 @@ interface PRP {
     content: any;
     media_type: any;
     profile_path: any;
-
 }
 interface IDTY {
     id: any;
     media_type: any;
-
-
 }
 
 const handleDragStart = (e: any) => e.preventDefault();
