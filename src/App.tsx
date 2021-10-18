@@ -18,7 +18,7 @@ const App: React.FC = () => {
         <Container>
           <Switch>
             <Route path="/Trending" component={Trending} />
-            <Route path="/Movies/:name" component={Movies} />
+            <Route path="/Movies" component={Movies} />
             <Route path="/TVSeries" component={Series} />
             <Route path="/Search" component={Search} />
             <Route path="/FavoritesMain" component={FavoritesMain} />
