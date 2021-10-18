@@ -20,16 +20,16 @@ const useStyles = makeStyles({
 
 export default function SimpleBottomNavigation() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState();
   const history = useHistory();
 
   useEffect(() => {
     if (value === 0) history.push({ pathname: `/Trending/` });
-    else if (value === 1) history.push({ pathname: `/Movies` });
+    else if (value === 1) history.push({ pathname: `/Movies/` });
     else if (value === 2) history.push({ pathname: `/TvSeries/` });
-    else if (value === 3) history.push("/Search");
+    else if (value === 3) history.push({ pathname: `/Search/` });
     else if (value === 4) history.push({ pathname: `/FavoritesMain/Add/` });
-  }, [value, history, name]);
+  }, [value, history]);
 
   return (
     <BottomNavigation
