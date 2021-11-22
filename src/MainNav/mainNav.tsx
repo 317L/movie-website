@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import SearchIcon from "@material-ui/icons/Search";
@@ -7,30 +6,29 @@ import WhatshotIcon from "@material-ui/icons/Whatshot";
 import TheatersIcon from "@material-ui/icons/Theaters";
 import TvIcon from "@material-ui/icons/Tv";
 import { useHistory } from "react-router-dom";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import "./mainNav.scss";
 
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-    backgroundColor: "black",
-    position: "fixed",
-    bottom: 0,
-  },
-});
-
-export default function SimpleBottomNavigation() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState();
+const SimpleBottomNavigation = () => {
+  const [value, setValue] = React.useState(0);
   const history = useHistory();
-
   useEffect(() => {
-    if (value === 0) history.push({ pathname: `/Trending/` });
-    else if (value === 1) history.push({ pathname: `/Movies/` });
-    else if (value === 2) history.push({ pathname: `/TvSeries/` });
-    else if (value === 3) history.push({ pathname: `/Search/` });
-    else if (value === 4) history.push({ pathname: `/FavoritesMain/Add/` });
-  }, [value, history]);
-
+    switch (value) {
+      case 0:
+        history.push({ pathname: `/Trending/` });
+        break;
+      case 1:
+        history.push({ pathname: `/Movies/` });
+        break;
+      case 2:
+        history.push({ pathname: `/TvSeries/` });
+        break;
+      case 3:
+        history.push({ pathname: `/Search/` });
+        break;
+      case 4:
+        history.push({ pathname: "/FavoritesMain/" });
+    }
+  }, [value, history]); // Prije ovoga su bili (else if) Mirzin prijedlog je bio da se stave switch i case
   return (
     <BottomNavigation
       value={value}
@@ -38,13 +36,12 @@ export default function SimpleBottomNavigation() {
         setValue(newValue);
       }}
       showLabels
-      className={classes.root}
     >
-      <BottomNavigationAction style={{ color: "white" }} label="Trending" icon={<WhatshotIcon />} />
-      <BottomNavigationAction style={{ color: "white" }} label="Movies" icon={<TheatersIcon />} />
-      <BottomNavigationAction style={{ color: "white" }} label="TvSeries" icon={<TvIcon />} />
-      <BottomNavigationAction style={{ color: "white" }} label="Search" icon={<SearchIcon />} />
-      <BottomNavigationAction style={{ color: "white" }} label="Favorites" icon={<FavoriteIcon />} />
+      <BottomNavigationAction label="Trending" icon={<WhatshotIcon />} />
+      <BottomNavigationAction label="Movies" icon={<TheatersIcon />} />
+      <BottomNavigationAction label="TvSeries" icon={<TvIcon />} />
+      <BottomNavigationAction label="Search" icon={<SearchIcon />} />
     </BottomNavigation>
   );
-}
+};
+export default SimpleBottomNavigation;

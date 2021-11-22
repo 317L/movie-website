@@ -2,7 +2,6 @@ interface INT {
   map: any;
   length: any;
 }
-
 const useGenres = (selectedGenres: INT) => {
   if (selectedGenres.length < 1) return "";
 

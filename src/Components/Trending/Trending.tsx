@@ -1,51 +1,37 @@
 import axios from "axios";
 import React from "react";
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect } from "react";
 import SinglePage from "../../SinglePage/SinglePage";
 import "./Trending.scss";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { IMovies } from "../../TSInterface";
 
-interface Props {
-  title: string;
-  poster: string | number;
-  date: number;
-  id: number | string;
-  media_type: string;
-  vote_average: number;
-  c: any;
-  poster_path: string;
-  first_air_date: number;
-  name: string;
-  release_date: number;
-  arr: number | string;
-}
-const Trending: FC<Props> = () => {
-  const [movies, setMovies] = useState([]);
+const Trending = () => {
+  const [movies, setMovies] = useState([]); // sto je ovdje niz ?
   const [pageNo, setPageNo] = useState(1);
-  useEffect(() => {
-    window.scroll(0, 0);
-    fetchTrending();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const fetchTrending = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&query&page=${pageNo}}`
+        `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&query&page=${pageNo}`
       );
-
-      if (pageNo > 1) {
+      if (pageNo < 1) {
+        setMovies(data.results);
+      } else {
         const arr = [...movies, ...data.results] as any;
         setMovies(arr);
-      } else {
-        setMovies(data.results);
       }
     } catch (error) {
       console.log("Axios GET request failed", error);
     }
     setPageNo(pageNo + 1);
   };
-
+  useEffect(() => {
+    window.scroll(0, 0);
+    fetchTrending();
+    return () => {
+      fetchTrending();
+    };
+  }, []);
   return (
     <InfiniteScroll
       dataLength={movies.length}
@@ -55,15 +41,15 @@ const Trending: FC<Props> = () => {
       scrollThreshold="500px"
     >
       <div className="Trending">
-        {movies.map((c: Props, idx) => (
+        {movies.map((movie: IMovies) => (
           <SinglePage
-            key={idx}
-            id={c.id}
-            poster={c.poster_path}
-            title={c.title || c.name}
-            date={c.first_air_date || c.release_date}
-            media_type={c.media_type}
-            vote_average={c.vote_average}
+            key={movie.id}
+            id={movie.id}
+            poster={movie.poster_path}
+            title={movie.title || movie.name}
+            date={movie.first_air_date || movie.release_date}
+            media_type={movie.media_type}
+            vote_average={movie.vote_average}
           />
         ))}
       </div>

@@ -1,44 +1,23 @@
 import axios from "axios";
-import * as React from "react";
 import { useState, useEffect } from "react";
 import SinglePage from "../../SinglePage/SinglePage";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Genres from "../../Genres/Genres";
-import useGenres from "../../Hooks/useGenre";
+import useGenres from "../../ComaPush/useGenre";
+import { IMovies } from "../../TSInterface";
 
-interface Mov {
-  title: string;
-  poster: string | number;
-  date: number;
-  id: number;
-  media_type: string;
-  vote_average: number;
-  movies: any;
-  poster_path: string;
-  first_air_date: number;
-  name: string;
-  release_date: number;
-}
-
-const Series: React.FC = () => {
+const Series = () => {
   const [moviesAlll, setMoviesAlll] = useState([]);
   const [pageNo, setPageNo] = useState(1);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [genres, setGenres] = useState([]);
   const genreforURL = useGenres(selectedGenres);
 
-  useEffect(() => {
-    window.scroll(0, 0);
-    fetchSeries();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [genreforURL]);
-
   const fetchSeries = async () => {
     try {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNo}&with_genres=${genreforURL}`
       );
-
       if (pageNo > 1) {
         const arr = [...moviesAlll, ...data.results] as any;
         setMoviesAlll(arr);
@@ -50,7 +29,13 @@ const Series: React.FC = () => {
     }
     setPageNo(pageNo + 1);
   };
-
+  useEffect(() => {
+    window.scroll(0, 0);
+    fetchSeries();
+    return () => {
+      fetchSeries();
+    };
+  }, [genreforURL]);
   return (
     <InfiniteScroll
       dataLength={moviesAlll.length}
@@ -60,7 +45,7 @@ const Series: React.FC = () => {
       scrollThreshold="200px"
     >
       <Genres
-        id={1}
+        id={1} // ovo treba prepravit i pregledat
         name={""}
         type="tv"
         selectedGenres={selectedGenres}
@@ -70,12 +55,12 @@ const Series: React.FC = () => {
         setPage={setPageNo}
       />
       <div className="Trending">
-        {moviesAlll.map((movies: Mov, idx) => (
+        {moviesAlll.map((movies: IMovies) => (
           <SinglePage
-            key={idx}
+            key={movies.id} /// key promjenjen
             id={movies.id}
             poster={movies.poster_path}
-            title={movies.title || movies.name}
+            title={movies.title || movies.name} // na ovom boleanu sam pao
             date={movies.first_air_date || movies.release_date}
             media_type="tv"
             vote_average={movies.vote_average}

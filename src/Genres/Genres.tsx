@@ -2,30 +2,19 @@ import { Chip } from "@material-ui/core";
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
+import { IGenre } from "../TSInterface";
 
-interface Movies {
-  selectedGenres: any;
-  setSelectedGenres: any;
-  genres: any;
-  setGenres: any;
-  type: string;
-  setPage: any;
-  name: string;
-  id: number;
-}
-
-const Genres = ({ selectedGenres, setSelectedGenres, genres, setGenres, type, setPage }: Movies) => {
+const Genres = ({ selectedGenres, setSelectedGenres, genres, setGenres, type, setPage }: IGenre) => {
   const handleAdd = (genre: { id: any }) => {
     setGenres(genres.filter((g: { id: any }) => g.id !== genre.id));
     setSelectedGenres([...selectedGenres, genre]);
     setPage(1);
   };
-
-  function handleRemove(genre: { id: any }) {
+  const handleRemove = (genre: { id: any }) => {
     setSelectedGenres(selectedGenres.filter((selected: { id: any }) => selected.id !== genre.id));
     setGenres([...genres, genre]);
     setPage(1);
-  }
+  };
 
   const fetchGenres = async () => {
     const { data } = await axios.get(
@@ -38,42 +27,39 @@ const Genres = ({ selectedGenres, setSelectedGenres, genres, setGenres, type, se
   console.log(genres);
   //unmounted component
   useEffect(() => {
-    fetchGenres();
-
+    function fetchGenres() {}
     return () => {
-      setGenres({}); // unmounting
+      fetchGenres();
+      setGenres({}); // unmounting     // zasto je ova funkcija ovde ? // Ovo je trebalo pojasnit nisam pojasnio i izbrisat sve eslintove
     };
-    // eslint-disable-next-line
   }, []);
 
   return (
     <div>
-      <div>
-        <div style={{ padding: "6px 0" }}>
-          {selectedGenres &&
-            selectedGenres.map((genre: Movies) => (
-              <Chip
-                style={{ margin: 2 }}
-                label={genre.name}
-                key={genre.id}
-                color="primary"
-                clickable
-                size="small"
-                onDelete={() => handleRemove(genre)}
-              />
-            ))}
-
-          {genres.map((genre: Movies) => (
+      <div style={{ padding: "6px 0" }}>
+        {selectedGenres &&
+          selectedGenres.map((genre: IGenre) => (
             <Chip
               style={{ margin: 2 }}
               label={genre.name}
               key={genre.id}
+              color="primary"
               clickable
               size="small"
-              onClick={() => handleAdd(genre)}
+              onDelete={() => handleRemove(genre)} // ovaj Delete je Mirza  kao suvisan mada je branko reko da je okej
             />
           ))}
-        </div>
+
+        {genres.map((genre: IGenre) => (
+          <Chip
+            style={{ margin: 2 }}
+            label={genre.name}
+            key={genre.id}
+            clickable
+            size="small"
+            onClick={() => handleAdd(genre)} // isto tako i za ovaj
+          />
+        ))}
       </div>
     </div>
   );

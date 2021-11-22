@@ -6,9 +6,23 @@
   margin: 15px 0;
   flex-wrap: wrap;
 }
-
 .Trending {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+.MuiFilledInput-root {
+}
+.MuiInputBase-input {
+  background-color: rgb(75, 71, 71) !important;
+  color: rgb(5, 5, 5) !important;
+  width: 100% !important;
+}
+.MuiFilledInput-root {
+}
+.MuiTab-textColorPrimary {
+  color: black !important;
+}
+.MuiButton-contained {
+  margin-left: 10px !important;
 }

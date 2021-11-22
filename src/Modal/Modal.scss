@@ -1,5 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
-
+.Classes_Modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Paper_paper {
+  width: 90%;
+  height: 90%;
+  background-color: #39445a;
+  border: 1px solid #282c34;
+  border-radius: 40px;
+  color: white;
+  padding: 1, 3, 9;
+}
 .ContentModal__landscape {
   object-fit: contain;
   border-radius: 10px;
