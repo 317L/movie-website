@@ -44,3 +44,37 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+
+This is small movie app that has 4 dynamic pages (Trending,Movies,TvSeries,Search) 
+Techonologies that used are React & TypeScript
+
+I used BrowserRouture and useHistory to make dynamic pages. 
+
+1.Trending page gets latest Movies and TVShows, I used this website/Database as my endpoint https://developers.themoviedb.org/3/getting-started/introduction
+2.Second Page is "Movies" that only fetch's Movies and genres for those movies, 
+3.Third one is named as "Series" it has the same functionality as the "Movies" but gets the latesyt TVshows  
+4.Last one is for search for those movies and series it has two filter buttons that provides search by selected type "tv" or "movies"
+
+Mostly I used Materials UI Components just so this page can be more elegant. I used ( AliceCaurousel, Modal, Badges, Button, Icons) 
+
+Also I used functionalties that came in ES6 Version of JavaScript (spreadoperator, descrutors, async , await, Chaining operator, etc) also some of the hooks that react provides, like useEffect, useState.
+
+I made a file that has all TS interfaces that are exported to my components indivudaly because code is much cleaner with that solution. 
+
+I hope you will find this code intresting.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
