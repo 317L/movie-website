@@ -13,6 +13,7 @@ const Search = () => {
   const [searchText, setSearchText] = useState("");
   const [pageNo, setPageNo] = useState(1);
   const [content, setContent] = useState([]);
+
   const darkTheme = createTheme({
     palette: {
       type: "dark",
@@ -22,9 +23,7 @@ const Search = () => {
     },
   });
   const fetchSearch = async () => {
-    if (!searchText) {
-      return;
-    }
+    if (!searchText) return;
     try {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
@@ -38,19 +37,27 @@ const Search = () => {
         setContent(data.results);
       }
     } catch (error) {
-      console.error(error);
+      console.log("Axios GET request failed", error);
     }
-    setPageNo(pageNo + 1);
+    setPageNo((prevNo) => prevNo + 1);
   };
 
   useEffect(() => {
-    window.scroll(0, 0);
     fetchSearch();
+    return () => {
+      setPageNo(pageNo);
+    };
   }, [type]);
 
   return (
     <div>
-      <InfiniteScroll dataLength={content.length} next={fetchSearch} hasMore={true} loader={""} scrollThreshold="200px">
+      <InfiniteScroll
+        dataLength={content.length}
+        next={fetchSearch}
+        hasMore={true}
+        loader={true}
+        scrollThreshold="200px"
+      >
         <ThemeProvider theme={darkTheme}>
           <div className="search">
             <TextField
@@ -80,15 +87,15 @@ const Search = () => {
         </ThemeProvider>
         <div className="Trending">
           {content &&
-            content.map((movie: ISearch) => (
+            content.map((search: ISearch) => (
               <SinglePage
-                key={movie.id}
-                id={movie.id}
-                poster={movie.poster_path}
-                title={movie.title || movie.name}
-                date={movie.first_air_date || movie.release_date}
+                key={search.id}
+                id={search.id}
+                poster={search.poster_path}
+                title={search.title || search.name}
+                date={search.first_air_date || search.release_date}
                 media_type={type ? "tv" : "movie"}
-                vote_average={movie.vote_average}
+                vote_average={search.vote_average}
               />
             ))}
         </div>

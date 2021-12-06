@@ -10,19 +10,23 @@ export interface IModalss {
   children: object;
   id: number;
   content: object;
-  media_type: any;
+  media_type: string;
 }
 export interface ICarousel {
   id: number;
-  media_type: number;
+  media_type: string;
 }
-
+export interface ICarouselo {
+  id: number;
+  media_type: string;
+  profile_path: object;
+  name: string;
+}
 export interface IModal {
   id: number;
-  media_type: any;
+  media_type: string;
   children: object;
 }
-
 export interface ISinglePage {
   title: string;
   poster: string;
@@ -42,6 +46,7 @@ export interface IMovies {
   release_date: number;
   id: number;
   name: string;
+  imdb_id: number;
 }
 
 export interface ISearch {
@@ -57,7 +62,7 @@ export interface ISearch {
   name: string;
   release_date: number;
   arr: number | string;
-  numOfPages: number;
+  idmb_id: number;
 }
 
 export interface IGenre {
@@ -67,6 +72,9 @@ export interface IGenre {
   setGenres: any;
   type: string;
   setPage: any;
-  name: any;
+}
+export interface IfilterGenre {
   id: number;
+  name: string;
+  genre: any;
 }

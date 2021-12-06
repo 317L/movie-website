@@ -11,16 +11,15 @@ import "./Modal.scss";
 import { IModal, IModalss } from "../TSInterface";
 
 const ContentModal = ({ children, media_type, id }: IModal) => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState<IModalss>();
   const [video, setVideo] = useState();
-
   const handleOpen = () => {
-    setOpen(true);
+    setIsOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setIsOpen(false);
   };
 
   const fetchData = async () => {
@@ -28,33 +27,30 @@ const ContentModal = ({ children, media_type, id }: IModal) => {
       `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
     );
     setContent(data);
-    setVideo(data.results);
-    console.log(data);
   };
 
-  // const fetchVideo = async () => {
-  //   const { data } = await axios.get(
-  //     `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
-  //   );
-  //   console.log(data);
-  //   setVideo(data.results[0]?.key);
-  // };
+  const fetchVideo = async () => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+    );
+    setVideo(data.results[0]?.key); // results0 provjereva da li postoji taj objekat ukoliko vraca null ili undefined nece nastavit dalje
+  };
 
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line
+    fetchVideo();
   }, []);
-
+  // pocetna vrijednost je undefined ukoliko je komponenta true i fade je open on ce napunit vrijednosti iz komponente
   return (
     <>
-      <div className="media" style={{ cursor: "pointer" }} color="inherit" onClick={handleOpen}>
+      <div className="media" color="inherit" onClick={handleOpen}>
         {children}
       </div>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className="Classes_Moda"
-        open={open}
+        open={isOpen}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -62,7 +58,7 @@ const ContentModal = ({ children, media_type, id }: IModal) => {
           timeout: 500,
         }}
       >
-        <Fade in={open}>
+        <Fade in={isOpen}>
           {content && (
             <div className="Paper_paper">
               <div className="ContentModal">
@@ -78,8 +74,7 @@ const ContentModal = ({ children, media_type, id }: IModal) => {
                 />
                 <div className="ContentModal__about">
                   <span className="ContentModal__title">
-                    {content.name || content.title} (
-                    {(content.first_air_date || content.release_date || "-----").substring(0, 4)})
+                    {content.name || content.title} ({content.first_air_date || content.release_date || ":/"})
                   </span>
                   {content.tagline && <i className="tagline">{content.tagline}</i>}
 

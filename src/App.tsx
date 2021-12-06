@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.scss";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Container } from "@material-ui/core";
@@ -7,10 +6,12 @@ import Movies from "../src/Components/Movies/Movies";
 import Series from "../src/Components/Series/Series";
 import Search from "../src/Components/Search/Search";
 import SimpleBottomNavigation from "./MainNav/mainNav";
+import Header from "../src/Components/Header/Header";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <Header />
       <div className="app">
         <Container>
           <Switch>
